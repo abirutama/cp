@@ -11,6 +11,7 @@ class Webhook extends CI_Controller {
         <?php
     }
     public function check(){
+        require_once(APPPATH.'libraries/cpapi.php');
         $txn_id = $_POST['txn_id'];
 
         $this->load->model('walletm', '',TRUE);
