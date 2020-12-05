@@ -2,13 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Webhook extends CI_Controller {
-    public function check(){
-        $txn_id = $_POST['txn_id'];
+    public function check($test=null){
+        if($test==null){
+            $txn_id = $_POST['txn_id'];
+        }else{
+            $txn_id = $test;
+        }
+        
 
         $this->load->model('walletm', '',TRUE);
         $update_payment = $this->walletm->get_spesific_deposit($txn_id);
-        //print_r($update_payment);
-        //die;
+        print_r($update_payment);
+        die();
         // Fill these in with the information from your CoinPayments.net account.
     $cp_merchant_id = 'e9e2519f51bdf3eccee4d30ecccc461d';
     $cp_ipn_secret = 'rupakarawdipnsecret';
@@ -58,8 +63,6 @@ class Webhook extends CI_Controller {
 
     $ipn_type = $_POST['ipn_type'];
     $txn_id = $_POST['txn_id'];
-    $item_name = $_POST['item_name'];
-    $item_number = $_POST['item_number'];
     $amount1 = floatval($_POST['amount1']);
     $amount2 = floatval($_POST['amount2']);
     $currency1 = $_POST['currency1'];
