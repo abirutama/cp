@@ -7,7 +7,7 @@ class Webhook extends CI_Controller {
 
         $this->load->model('walletm', '',TRUE);
         $update_payment = $this->walletm->get_spesific_deposit($txn_id);
-        print_r($update_payment);
+        //print_r($update_payment);
         //die;
         // Fill these in with the information from your CoinPayments.net account.
     $cp_merchant_id = 'e9e2519f51bdf3eccee4d30ecccc461d';
@@ -85,10 +85,13 @@ class Webhook extends CI_Controller {
  
     if ($status >= 100 || $status == 2) {
         // payment is complete or queued for nightly payout, success
+        $this->walletm->set_status_webhook(100);
     } else if ($status < 0) {
         //payment error, this is usually final but payments will sometimes be reopened if there was no exchange rate conversion or with seller consent
+        $this->walletm->set_status_webhook(-1);
     } else {
         //payment is pending, you can optionally add a note to the order page
+        $this->walletm->set_status_webhook(0);
     }
     die('IPN OK');
     }

@@ -61,6 +61,12 @@ class Walletm extends CI_Model {
 
         return $result_query;
     }
+
+    public function set_status_webhook($txn_id, $status_new){
+        $this->db->set('tbdr_status', $status_new);
+        $this->db->where('tbdr_depoid', $txn_id);
+        $this->db->update('tbdr_deposit_request');
+    }
 }
 
 ?>
