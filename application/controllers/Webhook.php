@@ -2,13 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Webhook extends CI_Controller {
-    public function check($test=null){
-        if($test==null){
+    public function check(){
             $txn_id = $_POST['txn_id'];
-        }else{
-            $txn_id = $test;
-        }
-        
 
         $this->load->model('walletm', '',TRUE);
         $update_payment = $this->walletm->get_spesific_deposit($txn_id);
@@ -89,12 +84,15 @@ class Webhook extends CI_Controller {
     if ($status >= 100 || $status == 2) {
         // payment is complete or queued for nightly payout, success
         $this->walletm->set_status_webhook($txn_id, 100);
+        echo '100';
     } else if ($status < 0) {
         //payment error, this is usually final but payments will sometimes be reopened if there was no exchange rate conversion or with seller consent
         $this->walletm->set_status_webhook($txn_id, -1);
+        echo '-1';
     } else {
         //payment is pending, you can optionally add a note to the order page
         $this->walletm->set_status_webhook($txn_id, 0);
+        echo '0';
     }
     die('IPN OK');
     }
