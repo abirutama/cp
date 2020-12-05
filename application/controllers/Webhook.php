@@ -2,8 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Webhook extends CI_Controller {
+    public function post(){
+        ?>
+        <form action="<?=base_url('webhook/check');?>" method="POST">
+<input class="input" type="text" name="txn_id">
+<button>submit</button>
+</form>
+        <?php
+    }
     public function check(){
-            $txn_id = $_POST['txn_id'];
+        $txn_id = $_POST['txn_id'];
 
         $this->load->model('walletm', '',TRUE);
         $update_payment = $this->walletm->get_spesific_deposit($txn_id);
