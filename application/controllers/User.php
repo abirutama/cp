@@ -31,7 +31,7 @@ class User extends CI_Controller {
         'buyer_email' => "abirutama@gmail.com",
         'item' => "Test Pembayaran",
         'address' => "",
-        'ipn_url' => "localhost/cp/webhook.php"
+        'ipn_url' => "https://rupakara.com/cp/webhook/check"
     ];
 
     $check_transaction = [
