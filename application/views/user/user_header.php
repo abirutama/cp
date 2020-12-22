@@ -18,7 +18,8 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <!--<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">-->
+                <strong class="has-text-primary is-size-5">Cryptovest.ID</strong>
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"

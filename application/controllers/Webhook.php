@@ -16,16 +16,16 @@ class Webhook extends CI_Controller {
 
         $this->load->model('walletm', '',TRUE);
         $update_payment = $this->walletm->get_spesific_deposit($txn_id);
-        //print_r($update_payment);
-        //die();
+        $order_currency = $update_payment['tbdr_coin_type'];
+        $order_total = $update_payment['tbdr_amount_coin'];
+ 
         // Fill these in with the information from your CoinPayments.net account.
         $cp_merchant_id = 'e9e2519f51bdf3eccee4d30ecccc461d';
         $cp_ipn_secret = 'rupakarawdipnsecret';
         $cp_debug_email = 'recover.null@gmail.com';
 
         //These would normally be loaded from your database, the most common way is to pass the Order ID through the 'custom' POST field.
-        $order_currency = $update_payment['tbdr_coin_type'];
-        $order_total = $update_payment['tbdr_amount_coin'];
+        
 
         function errorAndDie($error_msg) {
             global $cp_debug_email;
@@ -66,7 +66,6 @@ class Webhook extends CI_Controller {
         // HMAC Signature verified at this point, load some variables.
 
         $ipn_type = $_POST['ipn_type'];
-        $txn_id = $_POST['txn_id'];
         $amount1 = floatval($_POST['amount1']);
         $amount2 = floatval($_POST['amount2']);
         $currency1 = $_POST['currency1'];
